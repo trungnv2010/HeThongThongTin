@@ -153,6 +153,18 @@ def calculate_fee():
         
     print(f"\nTổng cộng - Số môn: {total_courses} | Tổng số tín chỉ: {total_credits} | Tổng học phí: {total_fee}")
 
+def delete_course():
+    #in ra danh sách các môn học và mã môn học
+    query="""select * from courses;"""
+    cursor.execute(query)
+    courses=cursor.fetchall()
+    for index in courses:
+        print('Ma mon hoc:',index[0],' Ten mon hoc: ',index[1],'\n')
+    #xóa một môn nào đó
+    code=input('Nhap ma mon hoc ban can xoa: ')
+    cursor.execute("""delete from courses where course_code like '%s';""",(code,))
+    print('Xoa thanh cong')
+
 if __name__ == "__main__":
     setup_database()
     
