@@ -59,38 +59,43 @@ if __name__ == "__main__":
                 mp.xoa_muc_phi(nam)
         #Thêm sửa xoá thông tin môn học
         if choice == "2":
-            print("Vui lòng chọn chức năng bên dưới: ")
-            print("1. Thêm")
-            print("2. Sửa")
-            print("3. Xoá")
-            choice1 = input("Chọn chức năng: ")
-            ma_mon_hoc = input("Nhập mã môn học: ")
-            ten_mon_hoc = input("Nhập tên môn học: ")
-            so_tin_chi = input("Nhập số tín chỉ: ")
-            he_so = input("Nhập hệ số: ")
-            if (choice1 == "1"): 
-                if (mh.mon_hoc_ton_tai(ma_mon_hoc)):
-                    print(f"Dữ liệu của môn học {ma_mon_hoc} đã có. Bạn có muốn tiếp tục không (1- có, 2 - không) ")
-                    cont = input("Chọn chức năng: ")
-                    if (cont == "1"): 
-                        mh.sua_mon_hoc(ma_mon_hoc, ten_mon_hoc, so_tin_chi, he_so)
-                    if (cont == "2"): 
-                        pass
-                else: 
-                    mh.them_mon_hoc(ma_mon_hoc, ten_mon_hoc, so_tin_chi, he_so)
-            if (choice1 == "2"): 
-                if (not mh.mon_hoc_ton_tai(ma_mon_hoc)):
-                    print(f"Dữ liệu của môn học {ma_mon_hoc} chưa có. Bạn có muốn tiếp tục không (1- có, 2 - không) ")
-                    cont = input("Chọn chức năng: ")
-                    if (cont == "1"): 
+            luachon=input("""Ban muon xem thong tin tat ca cac mon hoc hay nhap them 1 mon hoc ?( 
+1 la xem thong tin, 2 la nhap thong tin): """)
+            if luachon=="1":
+                mh.xem_thong_tin_tat_ca_mon_hoc()
+            if luachon=="2":
+                print("Vui lòng chọn chức năng bên dưới: ")
+                print("1. Thêm")
+                print("2. Sửa")
+                print("3. Xoá")
+                choice1 = input("Chọn chức năng: ")
+                ma_mon_hoc = input("Nhập mã môn học: ")
+                ten_mon_hoc = input("Nhập tên môn học: ")
+                so_tin_chi = input("Nhập số tín chỉ: ")
+                he_so = input("Nhập hệ số: ")
+                if (choice1 == "1"): 
+                    if (mh.mon_hoc_ton_tai(ma_mon_hoc)):
+                        print(f"Dữ liệu của môn học {ma_mon_hoc} đã có. Bạn có muốn tiếp tục không (1- có, 2 - không) ")
+                        cont = input("Chọn chức năng: ")
+                        if (cont == "1"): 
+                            mh.sua_mon_hoc(ma_mon_hoc, ten_mon_hoc, so_tin_chi, he_so)
+                        if (cont == "2"): 
+                            pass
+                    else: 
                         mh.them_mon_hoc(ma_mon_hoc, ten_mon_hoc, so_tin_chi, he_so)
-                    if (cont == "2"): 
-                        pass
-                else: 
-                    mh.sua_mon_hoc(ma_mon_hoc, ten_mon_hoc, so_tin_chi, he_so)
-        
-            if (choice1 == "3"): 
-                mh.xoa_mon_hoc(ma_mon_hoc)
+                if (choice1 == "2"): 
+                    if (not mh.mon_hoc_ton_tai(ma_mon_hoc)):
+                        print(f"Dữ liệu của môn học {ma_mon_hoc} chưa có. Bạn có muốn tiếp tục không (1- có, 2 - không) ")
+                        cont = input("Chọn chức năng: ")
+                        if (cont == "1"): 
+                            mh.them_mon_hoc(ma_mon_hoc, ten_mon_hoc, so_tin_chi, he_so)
+                        if (cont == "2"): 
+                            pass
+                    else: 
+                        mh.sua_mon_hoc(ma_mon_hoc, ten_mon_hoc, so_tin_chi, he_so)
+            
+                if (choice1 == "3"): 
+                    mh.xoa_mon_hoc(ma_mon_hoc)
 
         # Đăng ký học
         elif choice == "3":  
