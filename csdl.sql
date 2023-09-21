@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.33, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
--- Host: localhost    Database: tuition_fee
+-- Host: 127.0.0.1    Database: tuition_fee
 -- ------------------------------------------------------
--- Server version	8.0.33
+-- Server version	8.0.34
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -38,7 +38,7 @@ CREATE TABLE `dangkyhoc` (
 
 LOCK TABLES `dangkyhoc` WRITE;
 /*!40000 ALTER TABLE `dangkyhoc` DISABLE KEYS */;
-INSERT INTO `dangkyhoc` VALUES ('faccad62493a4155bf41c25350fa9a7a','A12345','IS345','2023-1','2023-09-21 13:54:42');
+INSERT INTO `dangkyhoc` VALUES ('','','','','');
 /*!40000 ALTER TABLE `dangkyhoc` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,7 +64,7 @@ CREATE TABLE `monhoc` (
 
 LOCK TABLES `monhoc` WRITE;
 /*!40000 ALTER TABLE `monhoc` DISABLE KEYS */;
-INSERT INTO `monhoc` VALUES ('','Phân tích thiết kế hướng đối tượng',3,1),('	IS345','An toàn thông tin',4,1.5),('AD204','Ẩm thực Việt nam',4,2),('AD204A','Ẩm thực Việt Nam',3,2),('AD214','Nâng cao chất lượng giọng hát	AD213 (0), AD213A (1)',3,1),('AD240','Nhiếp ảnh cơ bản',3,2),('AD242','Thiết kế mĩ thuật 1',3,1),('IS345','An toàn thông tin 1',2,3),('MA110A','Giải tích 1A',4,2),('PG102','GDTC: Thể dục cổ truyền cơ bản',3,1.5);
+INSERT INTO `monhoc` VALUES ('CS121','Ngôn ngữ lập trình',3,1.6),('CS223','Lập trình Java',3,1.6),('CS320','Học máy',3,1.8),('IS222','Cơ sở dữ liệu',3,1.6),('IS314','Hệ thống thông tin',3,1.6),('IS330','Dữ liệu lớn',2,1.8),('MA110','Giải tích 1',3,1.6),('MA111','Giải tích 2',3,1.6),('MA120','Đại số tuyến tính',3,1.6),('NW212','Mạng máy tính',2,1.6);
 /*!40000 ALTER TABLE `monhoc` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,7 +88,7 @@ CREATE TABLE `mucphi` (
 
 LOCK TABLES `mucphi` WRITE;
 /*!40000 ALTER TABLE `mucphi` DISABLE KEYS */;
-INSERT INTO `mucphi` VALUES (2023,456);
+INSERT INTO `mucphi` VALUES (2021,420000),(2022,440000),(2023,460000);
 /*!40000 ALTER TABLE `mucphi` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,7 +115,7 @@ CREATE TABLE `sinhvien` (
 
 LOCK TABLES `sinhvien` WRITE;
 /*!40000 ALTER TABLE `sinhvien` DISABLE KEYS */;
-INSERT INTO `sinhvien` VALUES ('A12345','Nguyễn Văn B','456st','12/4/2004',35),('A14569','Hoàng Thị D','12 st','15/9/2006',36),('A46123','Nguyễn Văn A','123 st','12/3/2003',34),('A78945','Lê Văn C','789 st','17/5/2002',33);
+INSERT INTO `sinhvien` VALUES ('A40401','Nguyễn Thảo Anh','BN','28/2/2003',34),('A41122','Nguyễn Văn Công','HN','03/04/2003',34),('A41234','Nguyễn Văn Sơn','HN','01/02/2003',34);
 /*!40000 ALTER TABLE `sinhvien` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -128,4 +128,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-21 14:01:40
+-- Dump completed on 2023-09-21 23:02:31
