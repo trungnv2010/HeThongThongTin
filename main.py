@@ -70,10 +70,11 @@ if __name__ == "__main__":
                 print("3. Xoá")
                 choice1 = input("Chọn chức năng: ")
                 ma_mon_hoc = input("Nhập mã môn học: ")
-                ten_mon_hoc = input("Nhập tên môn học: ")
-                so_tin_chi = input("Nhập số tín chỉ: ")
-                he_so = input("Nhập hệ số: ")
+                
                 if (choice1 == "1"): 
+                    ten_mon_hoc = input("Nhập tên môn học: ")
+                    so_tin_chi = input("Nhập số tín chỉ: ")
+                    he_so = input("Nhập hệ số: ")
                     if (mh.mon_hoc_ton_tai(ma_mon_hoc)):
                         print(f"Dữ liệu của môn học {ma_mon_hoc} đã có. Bạn có muốn tiếp tục không (1- có, 2 - không) ")
                         cont = input("Chọn chức năng: ")
@@ -84,6 +85,9 @@ if __name__ == "__main__":
                     else: 
                         mh.them_mon_hoc(ma_mon_hoc, ten_mon_hoc, so_tin_chi, he_so)
                 if (choice1 == "2"): 
+                    ten_mon_hoc = input("Nhập tên môn học: ")
+                    so_tin_chi = input("Nhập số tín chỉ: ")
+                    he_so = input("Nhập hệ số: ")
                     if (not mh.mon_hoc_ton_tai(ma_mon_hoc)):
                         print(f"Dữ liệu của môn học {ma_mon_hoc} chưa có. Bạn có muốn tiếp tục không (1- có, 2 - không) ")
                         cont = input("Chọn chức năng: ")
@@ -140,11 +144,11 @@ if __name__ == "__main__":
             print("3. Xoá")
             choice1 = input("Chọn chức năng: ")
             ma_sinh_vien = input("Nhập mã sinh viên: ")
-            ho_ten = input("Nhập họ tên sinh viên: ")
-            dia_chi = input("Địa chỉ: ")
-            ngay_sinh = input("Ngày sinh: ")
-            khoa_hoc = input("Khoá học: ")
             if (choice1 == "1"): 
+                ho_ten = input("Nhập họ tên sinh viên: ")
+                dia_chi = input("Địa chỉ: ")
+                ngay_sinh = input("Ngày sinh: ")
+                khoa_hoc = input("Khoá học: ")
                 if (sv.sinh_vien_ton_tai(ma_sinh_vien)):
                     print(f"Dữ liệu của sinh viên {ma_sinh_vien} đã có. Bạn có muốn tiếp tục không (1- có, 2 - không) ")
                     cont = input("Chọn chức năng: ")
@@ -155,6 +159,10 @@ if __name__ == "__main__":
                 else: 
                     sv.them_sinh_vien(ma_sinh_vien, ho_ten, dia_chi, ngay_sinh, khoa_hoc)
             if (choice1 == "2"): 
+                ho_ten = input("Nhập họ tên sinh viên: ")
+                dia_chi = input("Địa chỉ: ")
+                ngay_sinh = input("Ngày sinh: ")
+                khoa_hoc = input("Khoá học: ")
                 if (not sv.sinh_vien_ton_tai(ma_sinh_vien)):
                     print(f"Dữ liệu của sinh viên {ma_sinh_vien} chưa có. Bạn có muốn tiếp tục không (1- có, 2 - không) ")
                     cont = input("Chọn chức năng: ")
