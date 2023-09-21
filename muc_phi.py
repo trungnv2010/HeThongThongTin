@@ -27,3 +27,16 @@ class MucPhi:
         results = self.db.fetch_query(query, (nam,))
         return results[0][0] > 0
 
+    def lay_hoc_phi_theo_ky(self, ky_hoc):
+        # Tách kỳ học để lấy năm
+        nam_hoc = ky_hoc.split('-')[0]
+
+        # Truy vấn học phí dựa trên năm
+        query = "SELECT hoc_phi FROM MucPhi WHERE nam = %s"
+        result = self.db.fetch_query(query, (nam_hoc,))
+
+        # Kiểm tra nếu có kết quả
+        if result:
+            return result[0]
+        else:
+            return None

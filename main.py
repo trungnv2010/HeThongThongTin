@@ -118,6 +118,20 @@ if __name__ == "__main__":
             dk.dang_ky_mon_hoc(ma_sinh_vien, ma_mon_hoc, ky_hoc, ngay_dang_ky)
             print("Đăng ký thành công!")
 
+        # Thống kê học phí sinh viên 
+        if choice == "4": 
+            print("Vui lòng chọn chức năng bên dưới: ")
+            print("1. Thống kê học phí theo kỳ")
+            print("2. Thống kê tổng học phí của sinh viên")
+            choice1 = input("Chọn chức năng: ")
+            if choice1 == "1": 
+                ma_sinh_vien = input("Mã sinh viên: ")
+                ky_hoc = input("Kỳ học: ")
+                sv.thong_ke_hoc_phi_theo_ky(ma_sinh_vien, ky_hoc)
+            if choice1 == "2":
+                ma_sinh_vien = input("Mã sinh viên: ")
+                sv.tinh_tong_hoc_phi(ma_sinh_vien)
+
         #Thêm sửa xoá thông tin sinh viên
         if choice == "5":
             print("Vui lòng chọn chức năng bên dưới: ")
