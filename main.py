@@ -42,7 +42,7 @@ if __name__ == "__main__":
                     if (cont == "2"): 
                         pass
                 else: 
-                    mp.them_muc_phi(nam, hoc_phi)
+                    mp.them_muc_phi(nam, muc_phi)
             if (choice1 == "2"): 
                 hoc_phi = input("Nhập mức học phí: ")
                 if (not mp.muc_phi_ton_tai(nam)):
