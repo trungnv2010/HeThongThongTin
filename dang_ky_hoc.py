@@ -1,8 +1,13 @@
+import uuid
 class DangKyHoc:
     def __init__(self, db):
         self.db = db
 
-    def dang_ky_mon_hoc(self, ma_dang_ky_hoc, ma_sv, ma_mon_hoc, ky_hoc, ngay_dang_ky):
+    def tao_ma_dang_ky_hoc(self):
+        return str(uuid.uuid4().hex)
+
+    def dang_ky_mon_hoc(self, ma_sv, ma_mon_hoc, ky_hoc, ngay_dang_ky):
+        ma_dang_ky_hoc = self.tao_ma_dang_ky_hoc()
         query = """
         INSERT INTO DangKyHoc (ma_dang_ky_hoc, ma_sv, ma_mon_hoc, ky_hoc, ngay_dang_ky)
         VALUES (%s, %s, %s, %s, %s)
@@ -31,5 +36,13 @@ class DangKyHoc:
         GROUP BY d.ky_hoc
         """
         return self.db.fetch_query(query, (ma_sv,))
+
+    def da_dang_ky(self, ma_sv, ma_mon_hoc):
+        query = """
+        SELECT COUNT(*) FROM DangKyHoc
+        WHERE ma_sv=%s AND ma_mon_hoc=%s
+        """
+        results = self.db.fetch_query(query, (ma_sv, ma_mon_hoc))
+        return results[0][0] > 0
 
 

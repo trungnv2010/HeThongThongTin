@@ -3,6 +3,7 @@ from dang_ky_hoc import DangKyHoc
 from sinh_vien import SinhVien
 from mon_hoc import MonHoc
 from muc_phi import MucPhi
+from datetime import datetime
 
 if __name__ == "__main__":
     # Connect to the database
@@ -17,14 +18,13 @@ if __name__ == "__main__":
         print("=== MENU ===")
         print("1. Thiết lập mức đơn vị phí")
         print("2. Nhập thông tin môn học")
-        print("3. Nhập thông tin đăng ký học và tính học phí")
+        print("3. Nhập thông tin đăng ký học")
         print("4. Thống kê học phí cho sinh viên")
         print("5. Thêm/Sửa/Xoá thông tin sinh viên")
-        print("6. Thêm/Sửa/Xoá thông tin môn học")
         print("0. Thoát")
         
         choice = input("Chọn chức năng: ")
-
+        #Chỉnh sửa học phí
         if choice == "1":
             print("Vui lòng chọn chức năng bên dưới: ")
             print("1. Thêm")
@@ -57,8 +57,98 @@ if __name__ == "__main__":
         
             if (choice1 == "3"): 
                 mp.xoa_muc_phi(nam)
+        #Thêm sửa xoá thông tin môn học
+        if choice == "2":
+            print("Vui lòng chọn chức năng bên dưới: ")
+            print("1. Thêm")
+            print("2. Sửa")
+            print("3. Xoá")
+            choice1 = input("Chọn chức năng: ")
+            ma_mon_hoc = input("Nhập mã môn học: ")
+            ten_mon_hoc = input("Nhập tên môn học: ")
+            so_tin_chi = input("Nhập số tín chỉ: ")
+            he_so = input("Nhập hệ số: ")
+            if (choice1 == "1"): 
+                if (mh.mon_hoc_ton_tai(ma_mon_hoc)):
+                    print(f"Dữ liệu của môn học {ma_mon_hoc} đã có. Bạn có muốn tiếp tục không (1- có, 2 - không) ")
+                    cont = input("Chọn chức năng: ")
+                    if (cont == "1"): 
+                        mh.sua_mon_hoc(ma_mon_hoc, ten_mon_hoc, so_tin_chi, he_so)
+                    if (cont == "2"): 
+                        pass
+                else: 
+                    mh.them_mon_hoc(ma_mon_hoc, ten_mon_hoc, so_tin_chi, he_so)
+            if (choice1 == "2"): 
+                if (not mh.mon_hoc_ton_tai(ma_mon_hoc)):
+                    print(f"Dữ liệu của môn học {ma_mon_hoc} chưa có. Bạn có muốn tiếp tục không (1- có, 2 - không) ")
+                    cont = input("Chọn chức năng: ")
+                    if (cont == "1"): 
+                        mh.them_mon_hoc(ma_mon_hoc, ten_mon_hoc, so_tin_chi, he_so)
+                    if (cont == "2"): 
+                        pass
+                else: 
+                    mh.sua_mon_hoc(ma_mon_hoc, ten_mon_hoc, so_tin_chi, he_so)
+        
+            if (choice1 == "3"): 
+                mh.xoa_mon_hoc(ma_mon_hoc)
 
+        # Đăng ký học
+        elif choice == "3":  
+            ma_sinh_vien = input("Nhập mã sinh viên: ")
+            ma_mon_hoc = input("Nhập mã môn học bạn muốn đăng ký: ")
 
+            if not sv.sinh_vien_ton_tai(ma_sinh_vien):
+                print("Không có dữ liệu của sinh viên")
+                continue
+            if not mh.mon_hoc_ton_tai(ma_mon_hoc):
+                print("Môn học này không tồn tại trong hệ thống!")
+                continue
+            if dk.da_dang_ky(ma_sinh_vien, ma_mon_hoc):
+                print("Bạn đã đăng ký môn học này trước đó!")
+                continue
+            ky_hoc = input("Nhập kỳ học (VD: 2023-1): ")
+            # ngay_dang_ky = input("Nhập ngày đăng ký (Định dạng YYYY-MM-DD): ")
+            ngay_dang_ky = datetime.now()
+            ngay_dang_ky = ngay_dang_ky.strftime('%Y-%m-%d %H:%M:%S')
+            dk.dang_ky_mon_hoc(ma_sinh_vien, ma_mon_hoc, ky_hoc, ngay_dang_ky)
+            print("Đăng ký thành công!")
+
+        #Thêm sửa xoá thông tin sinh viên
+        if choice == "5":
+            print("Vui lòng chọn chức năng bên dưới: ")
+            print("1. Thêm")
+            print("2. Sửa")
+            print("3. Xoá")
+            choice1 = input("Chọn chức năng: ")
+            ma_sinh_vien = input("Nhập mã sinh viên: ")
+            ho_ten = input("Nhập họ tên sinh viên: ")
+            dia_chi = input("Địa chỉ: ")
+            ngay_sinh = input("Ngày sinh: ")
+            khoa_hoc = input("Khoá học: ")
+            if (choice1 == "1"): 
+                if (sv.sinh_vien_ton_tai(ma_sinh_vien)):
+                    print(f"Dữ liệu của sinh viên {ma_sinh_vien} đã có. Bạn có muốn tiếp tục không (1- có, 2 - không) ")
+                    cont = input("Chọn chức năng: ")
+                    if (cont == "1"): 
+                        sv.sua_sinh_vien(ma_sinh_vien, ho_ten, dia_chi, ngay_sinh, khoa_hoc)
+                    if (cont == "2"): 
+                        pass
+                else: 
+                    sv.them_sinh_vien(ma_sinh_vien, ho_ten, dia_chi, ngay_sinh, khoa_hoc)
+            if (choice1 == "2"): 
+                if (not sv.sinh_vien_ton_tai(ma_sinh_vien)):
+                    print(f"Dữ liệu của sinh viên {ma_sinh_vien} chưa có. Bạn có muốn tiếp tục không (1- có, 2 - không) ")
+                    cont = input("Chọn chức năng: ")
+                    if (cont == "1"): 
+                        sv.them_sinh_vien(ma_sinh_vien, ho_ten, dia_chi, ngay_sinh, khoa_hoc)
+                    if (cont == "2"): 
+                        pass
+                else: 
+                    sv.sua_sinh_vien(ma_sinh_vien, ho_ten, dia_chi, ngay_sinh, khoa_hoc)
+        
+            if (choice1 == "3"): 
+                sv.xoa_sinh_vien(ma_sinh_vien)
+        
         elif choice == "0":
             print("Thoát chương trình.")
             db.close()

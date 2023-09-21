@@ -58,7 +58,7 @@ class Database:
         
         self.cursor.execute("""
         CREATE TABLE IF NOT EXISTS DangKyHoc (
-            ma_dang_ky_hoc INT AUTO_INCREMENT PRIMARY KEY,
+            ma_dang_ky_hoc VARCHAR(255) PRIMARY KEY,
             ma_sv VARCHAR(255) REFERENCES SinhVien(ma_sv),
             ma_mon_hoc VARCHAR(255) REFERENCES MonHoc(ma_mon_hoc),
             ky_hoc VARCHAR(255),
