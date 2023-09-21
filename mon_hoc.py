@@ -37,5 +37,9 @@ class MonHoc:
         query = "SELECT COUNT(*) FROM MonHoc WHERE ma_mon_hoc=%s"
         results = self.db.fetch_query(query, (ma_mon_hoc,))
         return results[0][0] > 0
-
+    def xem_thong_tin_tat_ca_mon_hoc(self):
+        query="""select * from monhoc;"""
+        result=self.db.fetch_query(query)
+        for mh in result:
+            print('Mã môn học:',mh[0],' Tên môn học:',mh[1],' Số tín chỉ:',mh[2],' Hệ số:',mh[3])
 
