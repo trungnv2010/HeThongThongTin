@@ -1,0 +1,5 @@
+đăng ký - in danh sách 
+
+sửa -> hiển thị thông tin đã Sửa
+thêm mới -> hiện thị tất cả
+
