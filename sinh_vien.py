@@ -13,6 +13,7 @@ class SinhVien:
         VALUES (%s, %s, %s, %s, %s)
         """
         self.db.execute_query(query, (ma_sv, ho_ten, dia_chi, ngay_sinh, khoa_hoc))
+        self.xem_thong_tin()
 
     def sua_sinh_vien(self, ma_sv, ho_ten=None, dia_chi=None, ngay_sinh=None, khoa_hoc=None):
         fields_to_update = []
@@ -29,10 +30,13 @@ class SinhVien:
         if khoa_hoc:
             fields_to_update.append("khoa_hoc=%s")
             values.append(khoa_hoc)
-        query = f"UPDATE SinhVien SET {', '.join(fields_to_update)} WHERE ma_sv=%s"
-        values.append(ma_sv)
-        self.db.execute_query(query, values)
-
+        if (fields_to_update):
+            query = f"UPDATE SinhVien SET {', '.join(fields_to_update)} WHERE ma_sv=%s"
+            values.append(ma_sv)
+            self.db.execute_query(query, values)
+            self.xem_thong_tin(ma_sv)
+        else: 
+            print("Không có thông tin nào được chỉnh sửa")
     def xoa_sinh_vien(self, ma_sv):
         query = "DELETE FROM SinhVien WHERE ma_sv=%s"
         self.db.execute_query(query, (ma_sv,))
@@ -147,3 +151,21 @@ class SinhVien:
     
     def format_vnd(self, value):
         return "{:,.0f} VNĐ".format(value).replace(",", ".")
+
+    def xem_thong_tin(self, ma_sv = None): 
+        query = ""
+        results = ""
+        if ma_sv == None:
+            query = """ 
+                SELECT * FROM SinhVien 
+            
+            """
+            results = self.db.fetch_query(query, ())
+        else: 
+            query = """ 
+                SELECT * FROM SinhVien where ma_sv=%s
+            
+            """
+            results = self.db.fetch_query(query, (ma_sv,))
+        headers = ["Mã SV", "Họ và Tên", "Địa Chỉ", "Ngày Sinh", "Khoá Học"]
+        print(tabulate(results, headers=headers, tablefmt="grid")) 

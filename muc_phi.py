@@ -1,3 +1,4 @@
+from tabulate import tabulate
 class MucPhi:
     def __init__(self, db):
         self.db = db
@@ -8,10 +9,15 @@ class MucPhi:
         VALUES (%s, %s)
         """
         self.db.execute_query(query, (nam, hoc_phi))
+        self.xem_thong_tin()
 
     def sua_muc_phi(self, nam, hoc_phi):
         query = "UPDATE MucPhi SET hoc_phi=%s WHERE nam=%s"
-        self.db.execute_query(query, (hoc_phi, nam))
+        if (hoc_phi):
+            self.db.execute_query(query, (hoc_phi, nam))
+            self.xem_thong_tin(nam)
+        else: 
+            print("Không có thông tin nào được chỉnh sửa")
 
     def xoa_muc_phi(self, nam):
         query = "DELETE FROM MucPhi WHERE nam=%s"
@@ -40,3 +46,22 @@ class MucPhi:
             return result[0]
         else:
             return None
+
+
+    def xem_thong_tin(self, nam=None):
+        query = ""
+        results = ""
+        if nam == None:
+            query = """ 
+                SELECT * FROM MucPhi 
+            
+            """
+            results = self.db.fetch_query(query, ())
+        else: 
+            query = """ 
+                SELECT * FROM MucPhi where nam=%s
+            
+            """
+            results = self.db.fetch_query(query, (nam,))
+        headers = ["Năm", "Học Phí"]
+        print( tabulate(results, headers=headers, tablefmt="grid", floatfmt=(",.0f")))

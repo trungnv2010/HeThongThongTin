@@ -1,3 +1,4 @@
+from tabulate import tabulate
 class MonHoc:
     def __init__(self, db):
         self.db = db
@@ -8,6 +9,7 @@ class MonHoc:
         VALUES (%s, %s, %s, %s)
         """
         self.db.execute_query(query, (ma_mon_hoc, ten_mon_hoc, so_tin_chi, he_so))
+        self.xem_thong_tin_tat_ca_mon_hoc()
 
     def sua_mon_hoc(self, ma_mon_hoc, ten_mon_hoc=None, so_tin_chi=None, he_so=None):
         fields_to_update = []
@@ -21,9 +23,13 @@ class MonHoc:
         if he_so:
             fields_to_update.append("he_so=%s")
             values.append(he_so)
-        query = f"UPDATE MonHoc SET {', '.join(fields_to_update)} WHERE ma_mon_hoc=%s"
-        values.append(ma_mon_hoc)
-        self.db.execute_query(query, values)
+        if (fields_to_update):
+            query = f"UPDATE MonHoc SET {', '.join(fields_to_update)} WHERE ma_mon_hoc=%s"
+            values.append(ma_mon_hoc)
+            self.db.execute_query(query, values)
+            self.xem_thong_tin_tat_ca_mon_hoc(ma_mon_hoc)
+        else: 
+            print("Không có thông tin nào được chỉnh sửa")
 
     def xoa_mon_hoc(self, ma_mon_hoc):
         query = "DELETE FROM MonHoc WHERE ma_mon_hoc=%s"
@@ -37,9 +43,22 @@ class MonHoc:
         query = "SELECT COUNT(*) FROM MonHoc WHERE ma_mon_hoc=%s"
         results = self.db.fetch_query(query, (ma_mon_hoc,))
         return results[0][0] > 0
-    def xem_thong_tin_tat_ca_mon_hoc(self):
-        query="""select * from monhoc;"""
-        result=self.db.fetch_query(query)
-        for mh in result:
-            print('Mã môn học:',mh[0],' Tên môn học:',mh[1],' Số tín chỉ:',mh[2],' Hệ số:',mh[3])
+    def xem_thong_tin_tat_ca_mon_hoc(self, ma_mon_hoc=None):
+        query = ""
+        results = ""
+        if ma_mon_hoc == None:
+            query = """ 
+                SELECT * FROM MonHoc 
+            
+            """
+            results = self.db.fetch_query(query, ())
+        else: 
+            query = """ 
+                SELECT * FROM MonHoc where ma_mon_hoc=%s
+            
+            """
+            results = self.db.fetch_query(query, (ma_mon_hoc,))
+    
+        headers = ["Mã Môn Học", "Tên Môn Học", "Số Tín Chỉ", "Hệ Số"]
+        print(tabulate(results, headers=headers, tablefmt="grid")) 
 
