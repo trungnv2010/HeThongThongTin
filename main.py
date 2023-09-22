@@ -84,31 +84,35 @@ if __name__ == "__main__":
                 if (choice1 == "1"): 
                     ma_mon_hoc = input("Nhập mã môn học: ")
                     ten_mon_hoc = input("Nhập tên môn học: ")
+                    thu = input("Nhập thứ: ")
+                    ca_hoc = input("Nhập ca học: ")
                     so_tin_chi = input("Nhập số tín chỉ: ")
                     he_so = input("Nhập hệ số: ")
                     if (mh.mon_hoc_ton_tai(ma_mon_hoc)):
                         print(f"Dữ liệu của môn học {ma_mon_hoc} đã có. Bạn có muốn tiếp tục không (1- có, 2 - không) ")
                         cont = input("Chọn chức năng: ")
                         if (cont == "1"): 
-                            mh.sua_mon_hoc(ma_mon_hoc, ten_mon_hoc, so_tin_chi, he_so)
+                            mh.sua_mon_hoc(ma_mon_hoc, ten_mon_hoc, thu, ca_hoc, so_tin_chi, he_so)
                         if (cont == "2"): 
                             pass
                     else: 
-                        mh.them_mon_hoc(ma_mon_hoc, ten_mon_hoc, so_tin_chi, he_so)
+                        mh.them_mon_hoc(ma_mon_hoc, ten_mon_hoc, thu, ca_hoc, so_tin_chi, he_so)
                 if (choice1 == "2"): 
                     ma_mon_hoc = input("Nhập mã môn học: ")
                     ten_mon_hoc = input("Nhập tên môn học: ")
+                    thu = input("Nhập thứ: ")
+                    ca_hoc = input("Nhập ca học: ")
                     so_tin_chi = input("Nhập số tín chỉ: ")
                     he_so = input("Nhập hệ số: ")
                     if (not mh.mon_hoc_ton_tai(ma_mon_hoc)):
                         print(f"Dữ liệu của môn học {ma_mon_hoc} chưa có. Bạn có muốn tiếp tục không (1- có, 2 - không) ")
                         cont = input("Chọn chức năng: ")
                         if (cont == "1"): 
-                            mh.them_mon_hoc(ma_mon_hoc, ten_mon_hoc, so_tin_chi, he_so)
+                            mh.them_mon_hoc(ma_mon_hoc, ten_mon_hoc, thu, ca_hoc, so_tin_chi, he_so)
                         if (cont == "2"): 
                             pass
                     else: 
-                        mh.sua_mon_hoc(ma_mon_hoc, ten_mon_hoc, so_tin_chi, he_so)
+                        mh.sua_mon_hoc(ma_mon_hoc, ten_mon_hoc, thu, ca_hoc, so_tin_chi, he_so)
             
                 if (choice1 == "3"): 
                     ma_mon_hoc = input("Nhập mã môn học: ")

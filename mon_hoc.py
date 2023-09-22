@@ -3,20 +3,26 @@ class MonHoc:
     def __init__(self, db):
         self.db = db
 
-    def them_mon_hoc(self, ma_mon_hoc, ten_mon_hoc, so_tin_chi, he_so):
+    def them_mon_hoc(self, ma_mon_hoc, ten_mon_hoc, thu, ca_hoc, so_tin_chi, he_so):
         query = """
-        INSERT INTO MonHoc (ma_mon_hoc, ten_mon_hoc, so_tin_chi, he_so)
-        VALUES (%s, %s, %s, %s)
+        INSERT INTO MonHoc (ma_mon_hoc, ten_mon_hoc, thu, ca_hoc, so_tin_chi, he_so)
+        VALUES (%s, %s, %s, %s, %s,%s,)
         """
-        self.db.execute_query(query, (ma_mon_hoc, ten_mon_hoc, so_tin_chi, he_so))
+        self.db.execute_query(query, (ma_mon_hoc, ten_mon_hoc, so_tin_chi,thu, ca_hoc, he_so))
         self.xem_thong_tin_tat_ca_mon_hoc()
 
-    def sua_mon_hoc(self, ma_mon_hoc, ten_mon_hoc=None, so_tin_chi=None, he_so=None):
+    def sua_mon_hoc(self, ma_mon_hoc, ten_mon_hoc=None,thu=None, ca_hoc=None, so_tin_chi=None, he_so=None):
         fields_to_update = []
         values = []
         if ten_mon_hoc:
             fields_to_update.append("ten_mon_hoc=%s")
             values.append(ten_mon_hoc)
+        if thu:
+            fields_to_update.append("thu=%s")
+            values.append(thu)
+        if ca_hoc:
+            fields_to_update.append("ca_hoc=%s")
+            values.append(ca_hoc)
         if so_tin_chi:
             fields_to_update.append("so_tin_chi=%s")
             values.append(so_tin_chi)
@@ -59,6 +65,6 @@ class MonHoc:
             """
             results = self.db.fetch_query(query, (ma_mon_hoc,))
     
-        headers = ["Mã Môn Học", "Tên Môn Học", "Số Tín Chỉ", "Hệ Số"]
+        headers = ["Mã Môn Học", "Tên Môn Học", "Thứ", "Ca học", "Số Tín Chỉ", "Hệ Số"]
         print(tabulate(results, headers=headers, tablefmt="grid")) 
 
