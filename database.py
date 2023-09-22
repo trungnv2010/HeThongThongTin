@@ -68,6 +68,15 @@ class Database:
         )
         """)
 
+        self.cursor.execute("""
+        CREATE TABLE IF NOT EXISTS User (
+            user_name VARCHAR(255) PRIMARY KEY REFERENCES SinhVien(ma_sv),
+            password VARCHAR(255),
+            permission VARCHAR(1)
+        )
+        """)
+
+
         # Tạo dữ liệu cho bảng sinh viên 
 
         self.cursor.execute("SELECT COUNT(*) FROM SinhVien")
@@ -129,6 +138,32 @@ class Database:
                 ('CS133', 'Lập Trình Di Động', '3', '2', 3, 1.7),
                 ('CS134', 'Phân Tích và Thiết Kế Thuật Toán', '2', '2', 3, 1.9),
                 ('CS135', 'Bảo Mật Thông Tin', '5', '1', 3, 1.6)
+                
+            ]
+            self.cursor.executemany(query, data)
+
+        #Tạo dữ liệu cho bảng user
+        self.cursor.execute("SELECT COUNT(*) FROM User")
+        count = self.cursor.fetchone()[0]
+        if count == 0:
+            query = "INSERT INTO User (user_name, password, permission) VALUES (%s, %s, %s)"
+            data = [
+                ('PDT', '123456', 1),
+                ('SV01','123456', 2), 
+                ('SV02','123456', 2), 
+                ('SV03','123456', 2), 
+                ('SV04','123456', 2), 
+                ('SV05','123456', 2),
+                ('SV06','123456', 2), 
+                ('SV07','123456', 2), 
+                ('SV08','123456', 2),
+                ('SV09','123456', 2), 
+                ('SV10','123456', 2), 
+                ('SV11','123456', 2), 
+                ('SV12','123456', 2), 
+                ('SV13','123456', 2), 
+                ('SV14','123456', 2), 
+                ('SV15','123456', 2) 
                 
             ]
             self.cursor.executemany(query, data)

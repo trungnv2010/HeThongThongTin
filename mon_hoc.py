@@ -6,7 +6,7 @@ class MonHoc:
     def them_mon_hoc(self, ma_mon_hoc, ten_mon_hoc, thu, ca_hoc, so_tin_chi, he_so):
         query = """
         INSERT INTO MonHoc (ma_mon_hoc, ten_mon_hoc, thu, ca_hoc, so_tin_chi, he_so)
-        VALUES (%s, %s, %s, %s, %s,%s,)
+        VALUES (%s, %s, %s, %s, %s,%s)
         """
         self.db.execute_query(query, (ma_mon_hoc, ten_mon_hoc, so_tin_chi,thu, ca_hoc, he_so))
         self.xem_thong_tin_tat_ca_mon_hoc()
