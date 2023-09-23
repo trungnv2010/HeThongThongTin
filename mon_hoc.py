@@ -68,3 +68,26 @@ class MonHoc:
         headers = ["Mã Môn Học", "Tên Môn Học", "Thứ", "Ca học", "Số Tín Chỉ", "Hệ Số"]
         print(tabulate(results, headers=headers, tablefmt="grid")) 
 
+    def xem_thong_tin_cac_mon_theo_ky(self, ma_sinh_vien, ky_hoc): 
+        query = """
+            select 
+                mh.ma_mon_hoc, 
+                mh.ten_mon_hoc,
+                mh.thu,
+                mh.ca_hoc,
+                mh.so_tin_chi,
+                mh.he_so
+            from 
+                DangKyHoc as dk 
+            join 
+                MonHoc as mh on dk.ma_mon_hoc = mh.ma_mon_hoc
+            where
+                dk.ma_sv = %s and dk.ky_hoc= %s
+        """
+        results = self.db.fetch_query(query, (ma_sinh_vien, ky_hoc,))
+    
+        headers = ["Mã Môn Học", "Tên Môn Học", "Thứ", "Ca học", "Số Tín Chỉ", "Hệ Số"]
+        print(tabulate(results, headers=headers, tablefmt="grid")) 
+
+
+

@@ -189,12 +189,19 @@ class App:
             if choice1 == "1": 
                 if (ma_sinh_vien == None):
                     ma_sinh_vien = input("Mã sinh viên: ")
-                ky_hoc = input("Kỳ học: ")
-                self.sv.thong_ke_hoc_phi_theo_ky(ma_sinh_vien, ky_hoc)
+                    ky_hoc = input("Kỳ học: ")
+                    self.sv.thong_ke_hoc_phi_theo_ky(ma_sinh_vien, ky_hoc)
+                    ma_sinh_vien=None
+                else:
+                    ky_hoc = input("Kỳ học: ")
+                    self.sv.thong_ke_hoc_phi_theo_ky(ma_sinh_vien, ky_hoc)
             if choice1 == "2":
                 if (ma_sinh_vien == None):
                     ma_sinh_vien = input("Mã sinh viên: ")
-                self.sv.tinh_tong_hoc_phi(ma_sinh_vien)
+                    self.sv.tinh_tong_hoc_phi(ma_sinh_vien)
+                    ma_sinh_vien=None
+                else: 
+                    self.sv.tinh_tong_hoc_phi(ma_sinh_vien)
             if choice1 == "0": 
                 break
 
@@ -204,6 +211,7 @@ class App:
             print("\033[1;97;41mĐăng ký học\033[0m")
             print("Vui lòng chọn chức năng bên dưới: ")
             print("1. Đăng ký học")
+            print("2. Huỷ đăng ký học")
             print("0. Thoát")
             choice1 = input("Chọn chức năng: ")
             if choice1 == "1": 
@@ -227,6 +235,19 @@ class App:
                 ngay_dang_ky = ngay_dang_ky.strftime('%Y-%m-%d %H:%M:%S')
                 self.dk.dang_ky_mon_hoc(ma_sinh_vien, ma_mon_hoc, ky_hoc, ngay_dang_ky)
                 print("Đăng ký thành công!")
+                print(f"Các môn sinh viên {ma_sinh_vien} đã đăng ký trong kỳ {ky_hoc}: ")
+                self.mh.xem_thong_tin_cac_mon_theo_ky(ma_sinh_vien, ky_hoc)
+            if choice1 == '2':
+                ky_hoc = input("Nhập kỳ học (VD: 2023-1): ")
+                self.mh.xem_thong_tin_cac_mon_theo_ky(ma_sinh_vien, ky_hoc)
+                ma_mon_hoc = input("Nhập mã môn học bạn muốn huỷ đăng ký: ")
+                if not self.dk.da_dang_ky(ma_sinh_vien, ma_mon_hoc, ky_hoc):
+                    print("Bạn chưa đăng ký môn học trong kỳ này!")
+                    continue
+                # ngay_dang_ky = input("Nhập ngày đăng ký (Định dạng YYYY-MM-DD): ")
+                self.dk.huy_dang_ky(ma_sinh_vien, ma_mon_hoc, ky_hoc)
+                print(f"Các môn sinh viên {ma_sinh_vien} đã đăng ký trong kỳ {ky_hoc}: ")
+                self.mh.xem_thong_tin_cac_mon_theo_ky(ma_sinh_vien, ky_hoc)
             if choice1 == "0": 
                 break
 
